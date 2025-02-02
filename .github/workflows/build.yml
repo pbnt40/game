@@ -9,27 +9,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Шаг 1: Клонирование репозитория
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Шаг 2: Настройка Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
+      # Шаг 3: Установка зависимостей
       - name: Install dependencies
         run: |
           sudo apt update
           sudo apt install -y buildozer python3-pip git openjdk-17-jdk
           pip install kivy
 
+      # Шаг 4: Сборка APK
       - name: Build APK
         run: |
           buildozer init
           buildozer -v android debug
 
+      # Шаг 5: Загрузка APK как артефакта
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: bin/*.apk
