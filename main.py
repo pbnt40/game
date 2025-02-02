@@ -64,31 +64,31 @@ class ClickerGame(BoxLayout):
         popup = Popup(title="Shop", content=content, size_hint=(0.8, 0.8))
 
         # Улучшение силы клика
-        upgrade_click_power_btn = Button(
+        self.upgrade_click_power_btn = Button(
             text=f"Upgrade Click Power (+1) - Cost: {click_power_price}",
             size_hint=(1, 0.2),
             background_color=(0.2, 0.8, 0.2, 1)
         )
-        upgrade_click_power_btn.bind(on_press=lambda x: self.upgrade_click_power(popup))
-        content.add_widget(upgrade_click_power_btn)
+        self.upgrade_click_power_btn.bind(on_press=lambda x: self.upgrade_click_power(popup))
+        content.add_widget(self.upgrade_click_power_btn)
 
         # Покупка автокликера
-        buy_auto_clicker_btn = Button(
+        self.buy_auto_clicker_btn = Button(
             text=f"Buy Auto Clicker (+1) - Cost: {auto_clicker_price}",
             size_hint=(1, 0.2),
             background_color=(0.8, 0.2, 0.2, 1)
         )
-        buy_auto_clicker_btn.bind(on_press=lambda x: self.buy_auto_clicker(popup))
-        content.add_widget(buy_auto_clicker_btn)
+        self.buy_auto_clicker_btn.bind(on_press=lambda x: self.buy_auto_clicker(popup))
+        content.add_widget(self.buy_auto_clicker_btn)
 
         # Улучшение силы автокликера
-        upgrade_auto_clicker_power_btn = Button(
+        self.upgrade_auto_clicker_power_btn = Button(
             text=f"Upgrade Auto Clicker Power (+1) - Cost: {auto_clicker_power_price}",
             size_hint=(1, 0.2),
             background_color=(0.8, 0.8, 0.2, 1)
         )
-        upgrade_auto_clicker_power_btn.bind(on_press=lambda x: self.upgrade_auto_clicker_power(popup))
-        content.add_widget(upgrade_auto_clicker_power_btn)
+        self.upgrade_auto_clicker_power_btn.bind(on_press=lambda x: self.upgrade_auto_clicker_power(popup))
+        content.add_widget(self.upgrade_auto_clicker_power_btn)
 
         # Кнопка закрытия магазина
         close_btn = Button(text="Close Shop", size_hint=(1, 0.2), background_color=(0.5, 0.5, 0.5, 1))
@@ -107,7 +107,8 @@ class ClickerGame(BoxLayout):
             click_power += 1
             click_power_price = int(click_power_price * 1.2)
             self.update_score()
-            popup.content.children[-2].text = f"Upgrade Click Power (+1) - Cost: {click_power_price}"
+            # Обновляем текст кнопки напрямую через атрибут
+            self.upgrade_click_power_btn.text = f"Upgrade Click Power (+1) - Cost: {click_power_price}"
         else:
             self.show_popup("Not enough points!")
 
@@ -118,7 +119,8 @@ class ClickerGame(BoxLayout):
             auto_clickers += 1
             auto_clicker_price = int(auto_clicker_price * 1.2)
             self.update_score()
-            popup.content.children[-3].text = f"Buy Auto Clicker (+1) - Cost: {auto_clicker_price}"
+            # Обновляем текст кнопки напрямую через атрибут
+            self.buy_auto_clicker_btn.text = f"Buy Auto Clicker (+1) - Cost: {auto_clicker_price}"
         else:
             self.show_popup("Not enough points!")
 
@@ -129,7 +131,8 @@ class ClickerGame(BoxLayout):
             auto_clicker_power += 1
             auto_clicker_power_price = int(auto_clicker_power_price * 1.2)
             self.update_score()
-            popup.content.children[-4].text = f"Upgrade Auto Clicker Power (+1) - Cost: {auto_clicker_power_price}"
+            # Обновляем текст кнопки напрямую через атрибут
+            self.upgrade_auto_clicker_power_btn.text = f"Upgrade Auto Clicker Power (+1) - Cost: {auto_clicker_power_price}"
         else:
             self.show_popup("Not enough points!")
 
